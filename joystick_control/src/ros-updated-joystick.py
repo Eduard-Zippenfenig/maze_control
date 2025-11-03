@@ -13,7 +13,7 @@ class JoystickTwistStamped:
         self.deadzone = rospy.get_param("~deadzone", 0.1)
 
         # Publisher will publish TwistStamped messages
-        self.pub = rospy.Publisher(self.cmd_topic, TwistStamped, queue_size=1)
+        self.pub = rospy.Publisher('/twist_controller/zoned_command', TwistStamped, queue_size=1)
         self.rate = rospy.Rate(10)  
 
         # joystick detection
