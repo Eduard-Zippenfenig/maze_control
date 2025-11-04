@@ -10,7 +10,7 @@ from cv_bridge import CvBridge, CvBridgeError
 class HandTracker:
     def __init__(self):
         rospy.init_node('hand_tracker')
-
+        #TODO: add a low pass filter to smooth the transition of velocities of directions 
         # Parameters
         self.camera_topic = rospy.get_param('~camera_topic', '/camera/image_raw')
         self.max_speed = rospy.get_param('~max_speed', 0.05)  # 5 cm/s
