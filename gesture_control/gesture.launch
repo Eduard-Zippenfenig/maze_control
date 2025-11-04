@@ -1,60 +1,39 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- Camera configuration -->
-    <arg name="camera_topic" default="/cam/image_raw"/>
+    <!-- Hand Tracker Node Launch File -->
     
-    <!-- Maximum displacement in meters -->
-    <!-- When hand reaches edge of control zone, this is the displacement -->
-    <arg name="max_displacement_x" default="0.25" doc="Max displacement right/left (meters)"/>
-    <arg name="max_displacement_y" default="0.25" doc="Max displacement forward/back (meters)"/>
+    <!-- Arguments for easy configuration -->
+    <arg name="camera_topic" default="/cam/image_raw" 
+         doc="Input camera topic name"/>
+    <arg name="max_speed" default="0.05" 
+         doc="Maximum velocity in m/s (default: 0.05 = 5 cm/s)"/>
+    <arg name="deadzone" default="0.05" 
+         doc="Deadzone threshold for zero detection (default: 0.05)"/>
+    <arg name="output" default="screen" 
+         doc="Output destination: screen or log"/>
     
-    <!-- Control zone size (fraction of image) -->
-    <arg name="control_zone" default="0.3" doc="Control zone size (0-1)"/>
-    
-    <!-- Deadzone (fraction of image) -->
-    <arg name="deadzone" default="0.05" doc="Deadzone around center"/>
-    
-    <!-- Maximum joint velocity -->
-    <arg name="linear_speed" default="0.1" doc="Max joint velocity (rad/s)"/>
-    
-    <!-- ========================================
-         Hand Tracker Node
-         ======================================== -->
-    
-    <node name="hand_tracker" 
-          pkg="ros" 
-          type="hand_tracker.py"
-          output="screen">
+    <!-- Hand Tracker Node -->
+    <node pkg="ros" 
+          type="hand_tracker_node.py" 
+          name="hand_tracker" 
+          output="$(arg output)">
         
-        <!-- Camera -->
+        <!-- Parameters -->
         <param name="camera_topic" value="$(arg camera_topic)"/>
-        
-        <!-- Workspace mapping -->
-        <param name="max_displacement_x" value="$(arg max_displacement_x)"/>
-        <param name="max_displacement_y" value="$(arg max_displacement_y)"/>
-        
-        <!-- Control parameters -->
-        <param name="control_zone" value="$(arg control_zone)"/>
+        <param name="max_speed" value="$(arg max_speed)"/>
         <param name="deadzone" value="$(arg deadzone)"/>
-        <param name="linear_speed" value="$(arg linear_speed)"/>
     </node>
     
-    <!-- ========================================
-         Optional: USB Camera Node
-         ======================================== -->
-    
-    <node name="usb_cam" 
-          pkg="usb_cam" 
-          type="usb_cam_node"
-          output="screen"
-          if="false">
-        
+    <!-- Launch camera node if not already running -->
+    <!--
+    <node pkg="usb_cam" type="usb_cam_node" name="usb_cam">
         <param name="video_device" value="/dev/video0"/>
         <param name="image_width" value="640"/>
         <param name="image_height" value="480"/>
         <param name="pixel_format" value="yuyv"/>
-        <param name="camera_frame_id" value="camera"/>
+        <param name="camera_frame_id" value="usb_cam"/>
         <param name="io_method" value="mmap"/>
     </node>
+    -->
     
 </launch>
