@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="gesture_control" type="A2_corners.py" name="A2_corners"/>
+</launch>
