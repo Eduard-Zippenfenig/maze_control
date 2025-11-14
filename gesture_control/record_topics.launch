@@ -1,0 +1,9 @@
+<launch>
+    <node pkg=gesture_control" type="record" name="record_selected_topics"
+          args="-O selected_topics.bag
+                /joint_states
+                /command_publisher
+                /cam/image_raw
+                /zoned_twist_filter
+                /pose" />
+</launch>
