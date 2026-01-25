@@ -1,8 +1,28 @@
-### Associated Research Paper
+### Research Context and Purpose
 
-**Assessing the Emotional Response and Performance of Users When Controlling the UR5e Robotic Arm Using Hand Gesture in a Maze Task**
+This work was conducted as part of the study  
+**Assessing the Emotional Response and Performance of Users When Controlling the UR5e Robotic Arm Using Hand Gesture in a Maze Task**.
 
-This gesture control system was developed and evaluated as part of the above study, which investigates how psychological stress affects user performance and emotional state during gesture-based human–robot interaction.
+The research was designed to investigate how **psychological stress** affects user performance, emotional state, and perceived workload when interacting with a robot through **gesture-based control**.
+
+Gesture control is often considered intuitive and natural, but it is also highly sensitive to variations in human motor behavior. Under stress, users tend to make faster, less precise, and more abrupt movements. These changes can negatively impact system stability, control accuracy, and user confidence. The goal of this research was to determine whether performance degradation under stress originates from **human factors**, **system limitations**, or an interaction of both.
+
+To isolate these effects, a gesture control pipeline was developed with:
+- a **stable hand reference point** (midpoint of wrist and middle finger MCP),
+- a **deadzone** to suppress involuntary micro-movements,
+- and a **first-order low-pass filter (LPF)** to smooth velocity commands.
+
+The low-pass filter was intentionally included to reduce high-frequency noise while preserving responsiveness. This allowed the experiment to focus on how stress alters **intentional hand motion**, rather than amplifying tracking artifacts or sensor noise. By tuning the LPF parameter `alpha`, the system provided a balance between smoothness and immediacy that remained safe for human–robot interaction.
+
+Participants were asked to guide the robot’s end-effector through a maze using hand gestures under two conditions: a normal condition and a stress-induced condition (time pressure and verbal prompts). Performance metrics such as completion time and wall contacts were recorded alongside subjective measures of workload and emotional state.
+
+By combining a controlled gesture interface with psychological stressors, the study aimed to:
+- quantify how stress impacts precision and smoothness in gesture-based robot control,
+- evaluate whether filtering and deadzones sufficiently stabilize control under pressure,
+- and inform the design of more robust, stress-aware human–robot interaction systems.
+
+The findings highlight that gesture-based control is not solely a technical problem but a human-centered one, emphasizing the need to consider emotional and cognitive factors when designing interactive robotic systems.
+
 
 ---
 
